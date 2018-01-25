@@ -18,6 +18,10 @@ exports.generateMatchDetails = (matchId) => {
   return region_url + '/lol/match/v3/matches/' + matchId + "?api_key=" + process.env.RG_API_KEY;
 }
 
+exports.generateChampionIcon = (championIcon) => {
+  return 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + championIcon;
+}
+
 exports.getStaticURLS = () => {
   return [
     'http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json',

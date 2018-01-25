@@ -109,7 +109,13 @@ exports.getLatestMatches = (req, res) => {
         match.cspm = match.creepScore / (details.gameDuration / 60);
 
         let champion = _.find(staticFiles.champion.data, {"key": String(self.championId)});
-        match.champion = champion ? champion.name : match.champion;
+        if (champion) {
+          match.champion = {
+            name: champion.name,
+            icon: helper.generateChampionIcon(champion.image.full)
+          }
+        }
+        // match.champion = champion ? champion.name : match.champion;
 
         match.spells = []
 

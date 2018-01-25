@@ -23,26 +23,35 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 latest-matches" *ngIf="matches">
+    <div class="latest-matches" *ngIf="matches">
       <h2>Latest Matches</h2>
       <div class="card match-details" *ngFor="let match of matches">
         <h4>{{match.outcome}} - {{match.duration}} - {{match.kills}}/{{match.deaths}}/{{match.assists}} (k/d/a)</h4>
-        <div><span class="label">Champion: </span>{{match.champion}}</div>
-        <div><span class="label">Level: </span>{{match.champLevel}}</div>
-        <div><span class="label">Total Creep Score: </span>{{match.creepScore}}</div>
-        <div><span class="label">Creep Score/Min: </span>{{match.cspm | number : '1.2-2'}}</div>
-        <div><span class="label">Lane: </span>{{match.lane}}</div>
-        <div><span class="label">Role: </span>{{match.role}}</div>
-        <div *ngIf="match.spells && match.spells.length"><span class="label">Spells: </span>
-          <span *ngFor="let spell of match.spells;let last=last">{{spell}}<span *ngIf="!last">; </span></span>
-        </div>
-        <div *ngIf="match.items && match.items.length"><span class="label">Items: </span>
-          <span *ngFor="let item of match.items;let last=last">{{item}}<span *ngIf="!last">; </span></span>
-        </div>
-        <div *ngIf="match.runes && match.runes.length"><span class="label">Runes: </span>
-          <ul>
-            <li *ngFor="let rune of match.runes">{{rune.name}} - Rank: {{rune.rank}}
-          </ul>
+        <div class="row">
+          <div class="col-md-8">
+            <div><span class="label">Champion: </span>{{match.champion.name}}</div>
+            <div><span class="label">Level: </span>{{match.champLevel}}</div>
+            <div><span class="label">Total Creep Score: </span>{{match.creepScore}}</div>
+            <div><span class="label">Creep Score/Min: </span>{{match.cspm | number : '1.2-2'}}</div>
+            <div><span class="label">Lane: </span>{{match.lane}}</div>
+            <div><span class="label">Role: </span>{{match.role}}</div>
+            <div *ngIf="match.spells && match.spells.length"><span class="label">Spells: </span>
+              <span *ngFor="let spell of match.spells;let last=last">{{spell}}<span *ngIf="!last">; </span></span>
+            </div>
+            <div *ngIf="match.items && match.items.length"><span class="label">Items: </span>
+              <span *ngFor="let item of match.items;let last=last">{{item}}<span *ngIf="!last">; </span></span>
+            </div>
+            <div *ngIf="match.runes && match.runes.length"><span class="label">Runes: </span>
+              <ul>
+                <li *ngFor="let rune of match.runes">{{rune.name}} - Rank: {{rune.rank}}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="float-right">
+              <img src="{{match.champion.icon}}" alt="">
+            </div>
+          </div>
         </div>
       </div>
     </div>
