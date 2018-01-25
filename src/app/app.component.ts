@@ -23,7 +23,10 @@ export class AppComponent {
     this.matches = null;
     this.summonerService.getSummoner(this.name).subscribe(
       data => this.summoner = data,
-      err => this.toastrService.error(err.error, "Oops!"),
+      err => {
+        this.toastrService.error(err.error, "Oops!");
+        this.spinnerService.hide();
+      },
       () => { this.spinnerService.hide(); }
     );
   }
@@ -32,7 +35,10 @@ export class AppComponent {
     this.spinnerService.show();
     this.summonerService.getLatestMatches(this.summoner.accountId).subscribe(
       data => this.matches = data,
-      err => this.toastrService.error(err.error, "Oops!"),
+      err => {
+        this.toastrService.error(err.error, "Oops!");
+        this.spinnerService.hide();
+      },
       () => {
         this.spinnerService.hide();
       }
