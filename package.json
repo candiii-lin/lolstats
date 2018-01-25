@@ -4,12 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "postinstall": "ng build"
   },
   "engines": {
     "node": "8.9.3",
