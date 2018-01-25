@@ -122,7 +122,10 @@ exports.getLatestMatches = (req, res) => {
         _.each(spellKeys, (spellKey) => {
           let spell = _.find(staticFiles.summoner.data, {"key": String(self[spellKey])});
           if (spell) {
-            match.spells.push(spell.name);
+            match.spells.push({
+              name: spell.name,
+              icon: helper.generateSpellsIcon(spell.image.full)
+            });
           }
         });
 

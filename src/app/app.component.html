@@ -36,7 +36,7 @@
             <div><span class="label">Lane: </span>{{match.lane}}</div>
             <div><span class="label">Role: </span>{{match.role}}</div>
             <div *ngIf="match.spells && match.spells.length"><span class="label">Spells: </span>
-              <span *ngFor="let spell of match.spells;let last=last">{{spell}}<span *ngIf="!last">; </span></span>
+              <span *ngFor="let spell of match.spells;let last=last">{{spell.name}}<span *ngIf="!last">; </span></span>
             </div>
             <div *ngIf="match.items && match.items.length"><span class="label">Items: </span>
               <span *ngFor="let item of match.items;let last=last">{{item}}<span *ngIf="!last">; </span></span>
@@ -48,8 +48,15 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="float-right">
-              <img src="{{match.champion.icon}}" alt="">
+            <div class="float-md-right">
+              <div class="champion">
+                <img src="{{match.champion.icon}}" alt="">
+              </div>
+              <div class="spells">
+                <span *ngFor="let spell of match.spells">
+                  <img src="{{spell.icon}}" alt="">
+                </span>
+              </div>
             </div>
           </div>
         </div>
