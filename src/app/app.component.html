@@ -1,20 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<ng4-loading-spinner> </ng4-loading-spinner>
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    {{ title }}
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 summoner-form">
+      <form class="form-inline" (ngSubmit)="getSummoner()">
+        <input class="form-control" type="text" placeholder="Summoner Account" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+        <button type="submit" name="button" class="btn btn-primary">Get Summoner Details</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 summoner-detail" *ngIf="summoner">
+      <h2>Summoner</h2>
+      <div><img src="{{summoner.profileImage}}" alt=""></div>
+      <div><span class="label">Summoner Name: </span> {{summoner.name}}</div>
+      <div><span class="label">Summoner Level: </span> {{summoner.summonerLevel}}</div>
+      <div><button class="btn btn-primary" name="button" (click)="getMatches()">Get Latest Matches</button></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 latest-matches" *ngIf="matches">
+      <h2>Latest Matches</h2>
+      <div class="card match-details" *ngFor="let match of matches">
+        <h4>{{match.outcome}} - {{match.duration}} - {{match.kills}}/{{match.deaths}}/{{match.assists}} (k/d/a)</h4>
+        <div><span class="label">Champion: </span>{{match.champion}}</div>
+        <div><span class="label">Level: </span>{{match.champLevel}}</div>
+        <div><span class="label">Total Creep Score: </span>{{match.creepScore}}</div>
+        <div><span class="label">Creep Score/Min: </span>{{match.cspm | number : '1.2-2'}}</div>
+        <div><span class="label">Lane: </span>{{match.lane}}</div>
+        <div><span class="label">Role: </span>{{match.role}}</div>
+        <div *ngIf="match.spells && match.spells.length"><span class="label">Spells: </span>
+          <span *ngFor="let spell of match.spells;let last=last">{{spell}}<span *ngIf="!last">; </span></span>
+        </div>
+        <div *ngIf="match.items && match.items.length"><span class="label">Items: </span>
+          <span *ngFor="let item of match.items;let last=last">{{item}}<span *ngIf="!last">; </span></span>
+        </div>
+        <div *ngIf="match.runes && match.runes.length"><span class="label">Runes: </span>
+          <ul>
+            <li *ngFor="let rune of match.runes">{{rune.name}} - Rank: {{rune.rank}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

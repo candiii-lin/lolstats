@@ -5,17 +5,18 @@ const http = require('http');
 const app = express();
 
 // API file for interacting with MongoDB
-const setRoutes = require('../server/routes');
+const setRoutes = require('./server/routes');
 
 // Parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+require('dotenv').config()
+// console.log(process.env);
 
 // Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// API location
-app.use('/api', api);
+setRoutes(app);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
