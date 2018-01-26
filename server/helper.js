@@ -26,6 +26,10 @@ exports.generateSpellsIcon = (spellIcon) => {
   return 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/' + spellIcon;
 }
 
+exports.generateItemIcon = (itemIcon) => {
+  return 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/' + itemIcon;
+}
+
 exports.getStaticURLS = () => {
   return [
     'http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json',

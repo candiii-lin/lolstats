@@ -39,7 +39,7 @@
               <span *ngFor="let spell of match.spells;let last=last">{{spell.name}}<span *ngIf="!last">; </span></span>
             </div>
             <div *ngIf="match.items && match.items.length"><span class="label">Items: </span>
-              <span *ngFor="let item of match.items;let last=last">{{item}}<span *ngIf="!last">; </span></span>
+              <span *ngFor="let item of match.items;let last=last">{{item.name}}<span *ngIf="!last">; </span></span>
             </div>
             <div *ngIf="match.runes && match.runes.length"><span class="label">Runes: </span>
               <ul>
@@ -48,14 +48,25 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="float-md-right">
-              <div class="champion">
-                <img src="{{match.champion.icon}}" alt="">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="items">
+                  <span *ngFor="let item of match.items" class="single-item">
+                    <img src="{{item.icon}}" alt="" *ngIf="item.icon">
+                  </span>
+                </div>
               </div>
-              <div class="spells">
-                <span *ngFor="let spell of match.spells">
-                  <img src="{{spell.icon}}" alt="">
-                </span>
+              <div class="col-md-6">
+                <div class="float-md-right">
+                  <div class="champion">
+                    <img src="{{match.champion.icon}}" alt="">
+                  </div>
+                  <div class="spells">
+                    <span *ngFor="let spell of match.spells">
+                      <img src="{{spell.icon}}" alt="">
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

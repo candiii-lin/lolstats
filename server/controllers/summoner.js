@@ -135,9 +135,14 @@ exports.getLatestMatches = (req, res) => {
           let item = staticFiles.item.data[self.stats[itemKey]];
 
           if (item) {
-            match.items.push(item.name);
+            match.items.push({
+              name: item.name,
+              icon: helper.generateItemIcon(item.image.full)
+            });
           } else {
-            match.items.push("None");
+            match.items.push({
+              name: "None"
+            });
           }
         });
 
